@@ -3,9 +3,13 @@ package com.java.alogrithm.utils;
 import java.io.ByteArrayOutputStream;  
 import java.io.IOException;  
 import java.io.OutputStream;  
-  
-  
-  
+
+/**
+ * Base64字符串与字节码转换工具
+ * 
+ * @author steven-pan
+ * 
+ */
 public class Base64 {  
     private static final char[] legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();  
    
