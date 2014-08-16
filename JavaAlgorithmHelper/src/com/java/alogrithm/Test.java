@@ -2,7 +2,7 @@ package com.java.alogrithm;
 
 import com.java.alogrithm.helper.AESHelper;
 import com.java.alogrithm.helper.DESedeHelper;
-import com.java.alogrithm.helper.MD5SignHelper;
+import com.java.alogrithm.helper.SignatureHelper;
 import com.java.alogrithm.helper.RSAHelper;
 import com.java.alogrithm.utils.Hex;
 
@@ -20,7 +20,7 @@ public class Test {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		MD5SignHelper.main(args);
+		SignatureHelper.main(args);
 		System.out.println("------------------------------------\n");
 
 		Hex.main(args);
