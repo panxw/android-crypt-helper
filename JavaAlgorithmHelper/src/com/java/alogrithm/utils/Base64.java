@@ -134,5 +134,24 @@ public class Base64 {
                 i += 4;  
             }  
         }  
+        
+    	/**
+    	 * 去掉BASE64加密字符串换行符
+    	 * 
+    	 * @param str
+    	 * @return
+    	 */
+    	public static String filter(String str) {
+    		String output = "";
+    		StringBuffer sb = new StringBuffer();
+    		for (int i = 0; i < str.length(); i++) {
+    			int asc = str.charAt(i);
+    			if (asc != 10 && asc != 13) {
+    				sb.append(str.subSequence(i, i + 1));
+    			}
+    		}
+    		output = new String(sb);
+    		return output;
+    	}
           
 }  

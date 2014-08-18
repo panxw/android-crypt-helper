@@ -144,8 +144,6 @@ public class SignatureHelper {
 		System.out.println("digitalSign:" + digitalSign);
 
 		System.out.println(encryptMD5("abcv"));
-		;
 		System.out.println(encryptSHA1("abcv"));
-		;
 	}
 }
