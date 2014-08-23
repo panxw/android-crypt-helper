@@ -67,8 +67,6 @@ public class AESHelper {
 		// return null;
 		// }
 
-		String result = ""; // DES加密字符串
-		String newResult = "";// 去掉换行符后的加密字符串
 		try {
 			/* AES算法 */
 			SecretKey secretKey = new SecretKeySpec(passWord.getBytes(), "AES");// 获得密钥
@@ -76,8 +74,6 @@ public class AESHelper {
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey); // 设置工作模式为加密模式，给出密钥
 			byte[] resultBytes = cipher.doFinal(message.getBytes("UTF-8")); // 正式执行加密操作
 			return resultBytes;
-//			result = Base64.encode(resultBytes);// 进行BASE64编码
-//			newResult = filter(result); // 去掉加密串中的换行符
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -74,7 +74,7 @@ public class SignatureHelper {
 	}
 
 	/**
-	 * 获取数据加密值
+	 * 获取byte数组加密值
 	 * 
 	 * @param sortedArray
 	 * @param key
