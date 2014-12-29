@@ -1,8 +1,14 @@
 package com.java.alogrithm.helper;
 
+import java.security.InvalidKeyException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+import com.java.alogrithm.utils.Hex;
 
 /**
  * MD5, SHA-1等字符串签名工具
@@ -20,6 +26,11 @@ public class SignatureHelper {
 	 * algorithm: SHA-1
 	 */
 	private static final String ALGORITHM_SHA1 = "SHA-1";
+
+	/**
+	 * algorithm: HmacSHA1
+	 */
+	private static final String HMAC_SHA1 = "HmacSHA1";
 
 	/**
 	 * 对字符串取MD5值
@@ -54,23 +65,39 @@ public class SignatureHelper {
 	 */
 	private static String encyptByAlogrithm(String input, String alogrithm) {
 		try {
-			java.security.MessageDigest md = java.security.MessageDigest.getInstance(alogrithm);
+			java.security.MessageDigest md = java.security.MessageDigest
+					.getInstance(alogrithm);
 			md.update(input.getBytes("utf-8"));
 			byte temp[] = md.digest();
-
-			StringBuffer buf = new StringBuffer();
-			for (int i = 0; i < temp.length; i++) {
-				String hex = Integer.toHexString(temp[i] & 0xFF);
-				if (hex.length() < 2) {
-					buf.append("0");
-				}
-				buf.append(hex);
-			}
-			return buf.toString();
+			return Hex.encode(temp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	/**
+	 * encode HmacSHA1
+	 * 
+	 * @param data
+	 * @param key
+	 * @return
+	 */
+	public static byte[] encodeHmacSHA1(final String data, final String key) {
+		try {
+			Mac mac = Mac.getInstance(HMAC_SHA1);
+			SecretKeySpec spec = new SecretKeySpec(key.getBytes(), HMAC_SHA1);
+			mac.init(spec);
+			byte[] byteHMAC = mac.doFinal(data.getBytes());
+			if (byteHMAC != null) {
+				return byteHMAC;
+			}
+		} catch (InvalidKeyException e1) {
+			e1.printStackTrace();
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -135,15 +162,19 @@ public class SignatureHelper {
 		final String key = "abcdefghijklmn";
 		final String id = "0123456";
 		Date date = new Date();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.CHINA);// 取请求时间
-																							// yyyy-MM-dd
-																							// HH:mm:ss.fff
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS",
+				Locale.CHINA);// 取请求时间
+								// yyyy-MM-dd
+								// HH:mm:ss.fff
 		final String time = df.format(date);
-		final String originArray[] = new String[] { "id=" + id, "time=" + time, "key=" + key };
+		final String originArray[] = new String[] { "id=" + id, "time=" + time,
+				"key=" + key };
 		String digitalSign = encryptMD5ByArray(originArray, key);
 		System.out.println("digitalSign:" + digitalSign);
 
 		System.out.println(encryptMD5("abcv"));
 		System.out.println(encryptSHA1("abcv"));
+
+		System.out.println(Hex.encode(encodeHmacSHA1("abcv", "asdfasdafsf")));
 	}
 }
