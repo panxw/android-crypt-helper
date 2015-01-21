@@ -1,6 +1,10 @@
 package com.java.alogrithm.helper;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,6 +45,35 @@ public class SignatureHelper {
 	 */
 	public static String encryptMD5(String strInput) {
 		return encyptByAlogrithm(strInput, ALGORITHM_MD5);
+	}
+	
+	/**
+	 * 取文件MD5值
+	 * @param file
+	 * @return
+	 */
+	public static String encryptFileMD5(File file) {
+		FileInputStream fis = null;
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance(ALGORITHM_MD5);
+			fis = new FileInputStream(file);
+			byte[] buffer = new byte[102400];
+			int length;
+			while ((length = fis.read(buffer)) != -1) {
+				md.update(buffer, 0, length);
+			}
+			return Hex.encode(md.digest());
+		} catch (Exception e) {
+			return null;
+		} finally {
+			try {
+				if (fis != null)
+					fis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
