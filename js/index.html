@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+     
+<head>
+    <title>BASE64编码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <script type="text/javascript" src="base64.js"></script>
+   <script type="text/javascript" src="des3.js"></script>
+</head>
+<body>
+ 
+<script type="text/javascript">
+ 
+var str = "网址：http://www.sina.com.cn";
+document.write("原始字符串:</br>"+str);
+var base64 = BASE64.encoder(str);//返回编码后的字符 
+document.write("</br>BASE64后:</br>"+base64);
+//alert(base64);
+var unicode= BASE64.decoder(base64);//返回会解码后的字符串。  
+//alert(unicode);
+document.write("</br>还原:</br>"+unicode);
+//var str= "你好123hello";
+var key = "qXSdHWfbSZaaLeHBRhLgxBiG";
+//alert(decrypt_3des);
+var des3en = DES3.encrypt(key,str);
+document.write("</br>des3加密:</br>"+des3en);
+ 
+document.write("</br>des3解密:</br>"+DES3.decrypt(key,des3en));
+</script>
+ 
+ 
+</body>

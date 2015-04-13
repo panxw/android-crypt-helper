@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
 
 import com.java.alogrithm.utils.Hex;
 
@@ -184,6 +188,28 @@ public class SignatureHelper {
 		}
 		return originalArray;
 	}
+	
+	
+	/**
+	 * 按key升序排序
+	 * @param map
+	 * @return
+	 */
+	public static Map<String, String> sortMapByKey(Map<String, String> map) {
+		if (map == null || map.isEmpty()) {
+			return null;
+		}
+		Map<String, String> sortMap = new TreeMap<String, String>(new MapKeyComparator());
+		sortMap.putAll(map);
+		return sortMap;
+	}
+	
+	public static class MapKeyComparator implements Comparator<String>{
+		public int compare(String str1, String str2) {
+			return str1.compareTo(str2);
+		}
+	}
+	
 
 	/**
 	 * @param args
