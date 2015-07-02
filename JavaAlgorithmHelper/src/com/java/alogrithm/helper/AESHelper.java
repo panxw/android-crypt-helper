@@ -12,7 +12,7 @@ import com.java.alogrithm.utils.Base64;
 
 /**
  * AES算法加密，传输，解密过程示例(AES可以使用128、192、和256位密钥，并且用128位分组加密和解密数据)
- * 默认只能用16位密钥加密，但用security包下的java包换掉jre中对应的后，可任意密钥加解密。
+ * 默认只能用16个字节(128)位密钥，但使用本项目security目录下的jar包替换java jre目录下的文件后，则可以使用最高32字节(256位)密钥 了。
  * 
  * @author steven-pan
  * 

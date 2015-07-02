@@ -3,6 +3,7 @@ package com.java.alogrithm.utils;
 import java.io.ByteArrayOutputStream;  
 import java.io.IOException;  
 import java.io.OutputStream;  
+import java.io.UnsupportedEncodingException;
 
 /**
  * Base64字符串与字节码转换工具
@@ -143,6 +144,16 @@ public class Base64 {
     		return output;
     	}
     	
+    	
+    	public static void main(String[] args) {
+            try {
+                System.out.println(encode("asdssdfafasdfsw12345?@!#~#@#%#$%&%^*&&(&*)_()+()+sdfadsfsdfsfasd-*/878ssdfasdfasdfsadfsdafsadfasdfasdf".getBytes("UTF-8")));
+                System.out.println(new String(decode("YXNkc3NkZmFmYXNkZnN3MTIzNDU/QCEjfiNAIyUjJCUmJV4qJiYoJiopXygp KygpK3NkZmFkc2ZzZGZzZmFzZC0qLzg3OHNzZGZhc2RmYXNkZnNhZGZzZGFm c2FkZmFzZGZhc2Rm"), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     	
 //    	private static final char last2byte = (char) Integer
 //    			.parseInt("00000011", 2);
