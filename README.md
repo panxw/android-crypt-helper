@@ -12,11 +12,6 @@ Base64.java及Hex.java：字符串与字节码转换工具。
 #### 2.相关问题
 Base64如报错，请用security中的jar文件换掉JRE/lib/security中的jar包。    
 
-#### 3.联系作者
-Email: winfirm(#)163.com  
-QQ交流群: 168563980  
-
-
 ## License
 
     Licensed under the Apache License, Version 2.0 (the "License");
